@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -28,8 +29,7 @@ public class User {
     @Column
     private String lastName;
 
-    @Email( message = "Email address has invalid format: ${validatedValue}",
-            regexp = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$")
+    @Email()
     @NotBlank(message = "Email must be not empty")
     @Column
     private String email;
@@ -39,9 +39,8 @@ public class User {
     private String phone;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern = "yyyy-MM-dd")
-    @NotBlank(message = "BirthDate must be not empty")
     @Column
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @Column
     private String password;
