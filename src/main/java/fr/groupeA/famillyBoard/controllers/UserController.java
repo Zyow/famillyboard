@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -23,6 +24,11 @@ public class UserController {
         return userService.getUsers();
     }
 
+    @GetMapping(path = "{userId}")
+    public Optional<User> getUserById(@PathVariable Long userId) {
+        return userService.getUserById(userId);
+    }
+
     @PostMapping()
     public User createUser(@RequestBody User user){
         return userService.saveUser(user);
@@ -31,12 +37,12 @@ public class UserController {
     //// TODO: 03/05/2022
     //Erreur sur POSTMAN a corriger
     @PutMapping(path = "{userId}")
-    public User updateUser(@PathVariable("userId") long id, @RequestBody User user){
-        return userService.saveUser(user);
+    public User updateUser(@PathVariable Long userId, @RequestBody User user){
+       return userService.updateUser(userId, user);
     }
 
     @DeleteMapping(path = "{userId}")
-    public void deleteUser(@PathVariable("userId") long id){
-        userService.deleteUserById(id);
+    public void deleteUser(@PathVariable Long userId){
+        userService.deleteUserById(userId);
     }
 }
