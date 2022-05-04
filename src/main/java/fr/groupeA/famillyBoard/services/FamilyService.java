@@ -13,7 +13,6 @@ public class FamilyService {
 
     private final FamilyRepository familyRepository;
 
-    @Autowired
     public FamilyService(FamilyRepository familyRepository) {
         this.familyRepository = familyRepository;
     }

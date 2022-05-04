@@ -9,9 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping( path = "/api/families")
+@RequestMapping(path = "/api/families")
 public class FamilyController {
-
 
     private final FamilyService familyService;
 
@@ -20,7 +19,7 @@ public class FamilyController {
         this.familyService = familyService;
     }
 
-    @GetMapping(path = "/all")
+    @GetMapping
     public List<Family> getFamilies() {
       return familyService.getFamilies();
     }

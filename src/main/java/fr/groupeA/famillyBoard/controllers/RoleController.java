@@ -17,7 +17,7 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-    @GetMapping( path = "/all")
+    @GetMapping
     public List<Role> getRoles(){ return roleService.getAllRoles(); }
 
     @GetMapping( path = {"roleId"} )
