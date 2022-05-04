@@ -37,12 +37,12 @@ public class UserService {
     public User updateUser(Long userId, User user) {
         User userTemp = userRepository.findById(userId).get();
 
-        user.setFirstName(user.getFirstName());
-        user.setLastName(user.getLastName());
-        user.setEmail(user.getEmail());
-        user.setBirthDate(user.getBirthDate());
-        user.setPhone(user.getPhone());
-        user.setPrimaryImage(user.getPrimaryImage());
+        userTemp.setFirstName(user.getFirstName());
+        userTemp.setLastName(user.getLastName());
+        userTemp.setEmail(user.getEmail());
+        userTemp.setBirthDate(user.getBirthDate());
+        userTemp.setPhone(user.getPhone());
+        userTemp.setPrimaryImage(user.getPrimaryImage());
 
         return userRepository.save(userTemp);
     }
