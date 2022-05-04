@@ -33,4 +33,7 @@ build/
 .vscode/
 
 ### Application properties ###
-/src/main/resources/application.properties
+src/main/resources/application.properties
+
+### Test ignorer fichier toto ###
+src/main/resources/toto.xml
