@@ -1,10 +1,12 @@
 package fr.groupeA.famillyBoard.services;
 
-import fr.groupeA.famillyBoard.repositories.UserRepository;
 import fr.groupeA.famillyBoard.entities.User;
+import fr.groupeA.famillyBoard.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,5 +47,24 @@ public class UserService {
         userTemp.setPrimaryImage(user.getPrimaryImage());
 
         return userRepository.save(userTemp);
+    }
+
+    //Création d'une famille par un utilisateur
+    public void userCreateFamily(Long userId){
+
+        Optional<User> user = userRepository.findById(userId);
+
+        LocalDate today = LocalDate.now();
+        LocalDate birthDateUser = user.get().getBirthDate();
+        Period p = Period.between(birthDateUser, today);
+        System.out.println("Vous avez " + p.getYears() + " ans");
+
+        try{
+            if(p.getYears() > 18 ){
+                System.out.println("Création d'une famile");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

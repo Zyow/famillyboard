@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table( name = "user" )
@@ -48,4 +49,6 @@ public class User {
     @Column
     private String primaryImage;
 
+    @OneToMany(mappedBy = "family")
+    private List<Family> userFamilies;
 }

@@ -34,8 +34,6 @@ public class UserController {
         return userService.saveUser(user);
     }
 
-    //// TODO: 03/05/2022
-    //Erreur sur POSTMAN a corriger
     @PutMapping(path = "{userId}")
     public User updateUser(@PathVariable Long userId, @RequestBody User user){
        return userService.updateUser(userId, user);
@@ -45,4 +43,5 @@ public class UserController {
     public void deleteUser(@PathVariable Long userId){
         userService.deleteUserById(userId);
     }
+
 }
