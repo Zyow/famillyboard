@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(name = "/api/families")
+@RequestMapping( path = "/api/families")
 public class FamilyController {
 
 
