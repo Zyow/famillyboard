@@ -8,7 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table( name = "familly" )
+@Table( name = "family" )
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
