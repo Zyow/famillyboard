@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Familly {
+public class Family {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,6 +1,6 @@
 package fr.groupeA.famillyBoard.services;
 
-import fr.groupeA.famillyBoard.dao.UserRepository;
+import fr.groupeA.famillyBoard.repositories.UserRepository;
 import fr.groupeA.famillyBoard.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

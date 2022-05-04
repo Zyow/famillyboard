@@ -1,4 +1,4 @@
-package fr.groupeA.famillyBoard.dao;
+package fr.groupeA.famillyBoard.repositories;
 
 import fr.groupeA.famillyBoard.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
