@@ -6,9 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table( name = "family_member" )
+@Table( name = "familyMember" )
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,4 +32,8 @@ public class FamilyMember {
     @OneToOne
     private Score score;
 
+    @OneToMany(mappedBy = "familyMember"
+            //cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
+    )
+    private List<Task> taskList;
 }

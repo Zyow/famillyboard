@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -32,13 +33,18 @@ public class Task {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern = "yyyy-MM-dd")
     @Column
-    private Date startDate;
+    private LocalDate startDate;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern = "yyyy-MM-dd")
     @Column
-    private Date endDate;
+    private LocalDate endDate;
 
     @Column
     private int givenPoints;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "familyMember_id")
+    private FamilyMember familyMember;
+
 }
+

@@ -1,9 +1,6 @@
 package fr.groupeA.famillyBoard;
 
-import fr.groupeA.famillyBoard.entities.Family;
-import fr.groupeA.famillyBoard.entities.FamilyMember;
-import fr.groupeA.famillyBoard.entities.Score;
-import fr.groupeA.famillyBoard.entities.User;
+import fr.groupeA.famillyBoard.entities.*;
 import fr.groupeA.famillyBoard.enums.EnumRole;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -12,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class FamillyBoardApplication implements ApplicationRunner {
@@ -55,13 +54,33 @@ public class FamillyBoardApplication implements ApplicationRunner {
 			System.out.println("Creation d'un score : " + score1);
 
 			// Création d'un membre de la famille
+
 			FamilyMember familyMember1 = new FamilyMember(
 					1L,
 					user1,
 					family1,
 					EnumRole.ADMINISTRATOR,
-					score1);
+					score1,
+					null);
 			System.out.println("Creation d'un membre d'une famille : " + familyMember1);
+
+
+			//Créer une liste de tâches
+			Task task1 = new Task(
+					1L,
+					"task1",
+					"acheter du pain",
+					true,
+					LocalDate.of(2022, 05,05),
+					LocalDate.of(2022, 05,05),
+					2,
+					familyMember1);
+
+			List<Task> tasks = new ArrayList<>();
+			tasks.add(task1);
+			//familyMember1.setTaskList(tasks);
+			System.out.println("afficher la tâche : " + familyMember1);
+
 		}
 	}
 }
