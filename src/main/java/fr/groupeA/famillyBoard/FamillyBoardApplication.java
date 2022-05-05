@@ -60,8 +60,7 @@ public class FamillyBoardApplication implements ApplicationRunner {
 					user1,
 					family1,
 					EnumRole.ADMINISTRATOR,
-					score1,
-					null);
+					score1);
 			System.out.println("Creation d'un membre d'une famille : " + familyMember1);
 
 
@@ -76,11 +75,27 @@ public class FamillyBoardApplication implements ApplicationRunner {
 					2,
 					familyMember1);
 
+			Task task2 = new Task(
+					1L,
+					"task2",
+					"acheter des pommes",
+					true,
+					LocalDate.of(2022, 05,05),
+					LocalDate.of(2022, 05,05),
+					10,
+					familyMember1);
+
+			System.out.println("Tache : " + task1.getTitle() + " est liée à "+ task1.getFamilyMember());
+			System.out.println("Tache : " + task2.getTitle() + " est liée à "+ task2.getFamilyMember());
+
 			List<Task> tasks = new ArrayList<>();
 			tasks.add(task1);
-			//familyMember1.setTaskList(tasks);
-			System.out.println("afficher la tâche : " + familyMember1);
+			tasks.add(task2);
 
+			for (Task t : tasks) {
+				System.out.println(t.getTitle() + " - " + t.getFamilyMember());
+
+			}
 		}
 	}
 }

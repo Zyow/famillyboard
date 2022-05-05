@@ -32,8 +32,4 @@ public class FamilyMember {
     @OneToOne
     private Score score;
 
-    @OneToMany(mappedBy = "familyMember"
-            //cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
-    )
-    private List<Task> taskList;
 }
