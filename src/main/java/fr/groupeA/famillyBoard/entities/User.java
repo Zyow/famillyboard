@@ -10,6 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -48,7 +49,4 @@ public class User {
 
     @Column
     private String primaryImage;
-
-    @OneToMany(mappedBy = "family")
-    private List<Family> userFamilies;
 }

@@ -20,6 +20,6 @@ public class Score {
 
     @Column
     @DecimalMin(message = "Score can't be negative", value = "0", inclusive = false)
-    private int userScore;
+    private Integer score;
 
 }

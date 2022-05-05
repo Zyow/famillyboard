@@ -1,10 +1,10 @@
 package fr.groupeA.famillyBoard.repositories;
 
-import fr.groupeA.famillyBoard.entities.Role;
+import fr.groupeA.famillyBoard.entities.FamilyMember;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface FamilyMemberRepository extends JpaRepository<FamilyMember, Long> {
 
 }

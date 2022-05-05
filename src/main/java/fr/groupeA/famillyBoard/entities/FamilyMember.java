@@ -8,17 +8,26 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table( name = "role" )
+@Table( name = "family_member" )
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Role {
+public class FamilyMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne
+    private User user;
+
+    @OneToOne
+    private Family family;
+
     @Column
     private EnumRole role;
+
+    @OneToOne
+    private Score score;
 
 }

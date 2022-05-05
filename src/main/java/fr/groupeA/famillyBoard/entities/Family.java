@@ -22,7 +22,4 @@ public class Family {
     @Column
     @NotBlank
     private String title;
-
-    @OneToMany( mappedBy = "user" )
-    private List<User> userFamilies;
 }
