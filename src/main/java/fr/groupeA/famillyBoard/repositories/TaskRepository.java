@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-    @Query("SELECT t FROM Task t WHERE t.title = ?1 AND  familyMember.id = ?1")
-    public List<Task> findAllTasksByFamilyMember(String title, ) ;
+    //@Query("SELECT t FROM Task t WHERE t.title = ?1 AND  familyMember.id = ?1")
+    //public List<Task> findByFamilyMember(String title, ) ;
 
 
 }

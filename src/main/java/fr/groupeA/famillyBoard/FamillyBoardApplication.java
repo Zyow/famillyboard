@@ -6,6 +6,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -21,6 +22,7 @@ public class FamillyBoardApplication implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments arg0) throws Exception{
+
 
 		// Création d'un utilisateur
 		User user1 = new User(
