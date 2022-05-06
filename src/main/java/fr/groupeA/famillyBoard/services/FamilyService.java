@@ -19,13 +19,18 @@ import java.util.Optional;
 @Service
 public class FamilyService {
 
-    private final FamilyRepository familyRepository;
+    private FamilyRepository familyRepository;
     private UserRepository userRepository;
+    private UserService userService;
     private ScoreRepository scoreRepository;
     private FamilyMemberRepository familyMemberRepository;
 
-    public FamilyService(FamilyRepository familyRepository) {
+    public FamilyService(FamilyRepository familyRepository, UserRepository userRepository, UserService userService, ScoreRepository scoreRepository, FamilyMemberRepository familyMemberRepository) {
         this.familyRepository = familyRepository;
+        this.userRepository = userRepository;
+        this.userService = userService;
+        this.scoreRepository = scoreRepository;
+        this.familyMemberRepository = familyMemberRepository;
     }
 
     // récupère la liste des familles
@@ -58,7 +63,7 @@ public class FamilyService {
     //Création d'une famille par un utilisateur
     public void userCreateAFamily(Long userId, String familyTitle){
 
-        Optional<User> user = userRepository.findById(userId);
+        Optional<User> user = userService.getUserById(userId);
 
         // Vérification de l'âge de l'utilisateur
         LocalDate today = LocalDate.now();

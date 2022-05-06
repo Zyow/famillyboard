@@ -35,7 +35,7 @@ public class FamilyController {
     }
 
     @PostMapping(path = "createMyFamily")
-    public void createAFamily(@RequestBody Long userId, String familyTitle) {
+    public void createAFamily(@RequestParam Long userId, @RequestParam String familyTitle) {
         familyService.userCreateAFamily(userId, familyTitle);
     }
 

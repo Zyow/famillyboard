@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table( name = "score" )
@@ -19,7 +20,7 @@ public class Score {
     private Long id;
 
     @Column
-    @DecimalMin(message = "Score can't be negative", value = "0", inclusive = false)
+    //@Min(message = "Score can't be negative", value = 0)
     private Integer score;
 
 }
