@@ -22,15 +22,14 @@ public class FamilyService {
     private FamilyRepository familyRepository;
     private UserRepository userRepository;
     private UserService userService;
-    private ScoreRepository scoreRepository;
-    private FamilyMemberRepository familyMemberRepository;
+    private ScoreService scoreService;
+    private FamilyMemberService familyMemberService;
 
-    public FamilyService(FamilyRepository familyRepository, UserRepository userRepository, UserService userService, ScoreRepository scoreRepository, FamilyMemberRepository familyMemberRepository) {
+    public FamilyService(FamilyRepository familyRepository, ScoreService scoreService, UserService userService, FamilyMemberService familyMemberService) {
         this.familyRepository = familyRepository;
-        this.userRepository = userRepository;
         this.userService = userService;
-        this.scoreRepository = scoreRepository;
-        this.familyMemberRepository = familyMemberRepository;
+        this.scoreService = scoreService;
+        this.familyMemberService = familyMemberService;
     }
 
     // récupère la liste des familles
@@ -82,17 +81,18 @@ public class FamilyService {
                 // Création d'un score
                 Score score = new Score();
                 score.setScore(0);
-                Score scoreCreated = scoreRepository.save(score);
+                Score scoreCreated = scoreService.createAScore(score);
                 System.out.println("Creation d'un score : " + score);
 
                 //Création d'un membre de la famille
                 FamilyMember familyMember = new FamilyMember();
                 familyMember.setUser(user.get());
+                familyMember.setFamily(familyCreated);
                 familyMember.setScore(scoreCreated);
                 familyMember.setRole(EnumRole.ADMINISTRATOR);
                 familyMember.setScore(scoreCreated);
 
-                familyMemberRepository.save(familyMember);
+                familyMemberService.createOneFamilyMember(familyMember);
                 System.out.println("Creation d'un membre d'une famille : " + familyMember);
             }
         } catch (Exception e) {
