@@ -14,6 +14,10 @@ public class ScoreService {
     }
 
     public Score createAScore(Score score) {
+
+        score.setScore(0);
+        System.out.println("Creation d'un score : " + score);
+
         return scoreRepository.save(score);
     }
 }

@@ -44,4 +44,9 @@ public class UserController {
         userService.deleteUserById(userId);
     }
 
+    @PostMapping(path = "createMyFamily")
+    public void userCreateAFamily(@RequestParam Long userId, @RequestParam String familyTitle){
+        userService.userCreateAFamily(userId, familyTitle);
+    }
+
 }

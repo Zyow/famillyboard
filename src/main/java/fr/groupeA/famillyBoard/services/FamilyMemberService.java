@@ -1,21 +1,31 @@
 package fr.groupeA.famillyBoard.services;
 
+import fr.groupeA.famillyBoard.entities.Family;
 import fr.groupeA.famillyBoard.entities.FamilyMember;
+import fr.groupeA.famillyBoard.entities.Score;
+import fr.groupeA.famillyBoard.entities.User;
 import fr.groupeA.famillyBoard.enums.EnumRole;
 import fr.groupeA.famillyBoard.repositories.FamilyMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class FamilyMemberService {
     private final FamilyMemberRepository familyMemberRepository;
+    private FamilyService familyService;
+    private UserService userService;
+    private ScoreService scoreService;
 
     @Autowired
-    public FamilyMemberService(FamilyMemberRepository familyMemberRepository) {
+    public FamilyMemberService(FamilyMemberRepository familyMemberRepository, FamilyService familyService, UserService userService, ScoreService scoreService) {
         this.familyMemberRepository = familyMemberRepository;
+        this.familyService = familyService;
+        this.userService = userService;
+        this.scoreService = scoreService;
     }
 
     public List<FamilyMember> getAllFamilyMembers() {
@@ -39,4 +49,39 @@ public class FamilyMemberService {
     public void deleteOneFamilyMemberById(Long id) {
         familyMemberRepository.deleteById(id);
     }
+
+    public void addAUserToAFamily(Long memberFamilyId, Long userId){
+
+        try{
+            Optional<FamilyMember> memberFamilyAdmin = familyMemberRepository.findById(memberFamilyId);
+            Optional<User> userToAdd = userService.getUserById(userId);
+            Optional<Family> family = familyService.getFamilyById(memberFamilyAdmin.get().getFamily().getId());
+
+            EnumRole memberFamilyRole = memberFamilyAdmin.get().getRole();
+
+            if (memberFamilyRole == EnumRole.ADMINISTRATOR){
+
+                // Création d'un score
+                Score newScore = scoreService.createAScore(new Score());
+
+                //Création d'un membre de la famille
+                FamilyMember familyMember = new FamilyMember();
+                familyMember.setUser(userToAdd.get());
+                familyMember.setFamily(family.get());
+                familyMember.setScore(newScore);
+                familyMember.setRole(EnumRole.USER);
+
+                System.out.println("L'utilisateur " + userToAdd.get().getFirstName() + " " + userToAdd.get().getLastName() + " a été ajouté a la famille " + family.get().getTitle() );
+                familyMemberRepository.save(familyMember);
+
+            } else {
+                System.err.println("Le membre de famille n'a pas les droits d'administrateur.");
+
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
 }

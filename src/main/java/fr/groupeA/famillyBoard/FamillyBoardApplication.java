@@ -1,5 +1,6 @@
 package fr.groupeA.famillyBoard;
 
+import fr.groupeA.famillyBoard.Methods.AgeCalculator;
 import fr.groupeA.famillyBoard.entities.*;
 import fr.groupeA.famillyBoard.enums.EnumRole;
 import org.springframework.boot.ApplicationArguments;
@@ -38,13 +39,27 @@ public class FamillyBoardApplication implements ApplicationRunner {
 
 		System.out.println("user = " + user1);
 
-		// Vérifier l'âge de l'utilisateur
-		LocalDate today = LocalDate.now();
-		LocalDate birthDateUser = user1.getBirthDate();
-		Period p = Period.between(birthDateUser, today);
-		System.out.println("Vous avez " + p.getYears() + " ans");
+		// Création d'un deuxieme utilisateur
+		User user2 = new User(
+				1L,
+				"Bob",
+				"test",
+				"test@mail.fr",
+				"0123456789",
+				LocalDate.of(2016, 3, 2),
+				"1234",
+				null
+		);
 
-		if (p.getYears() >= 18 ) {
+
+		// Vérifier l'âge de l'utilisateur
+//		LocalDate today = LocalDate.now();
+//		LocalDate birthDateUser = user1.getBirthDate();
+//		Period p = Period.between(birthDateUser, today);
+//		System.out.println("Vous avez " + p.getYears() + " ans");
+		int age = AgeCalculator.getYears(user1.getBirthDate());
+
+		if (age >= 18 ) {
 			System.out.println("Creation de famille");
 
 			// Création d'une famille
@@ -99,5 +114,8 @@ public class FamillyBoardApplication implements ApplicationRunner {
 
 			}
 		}
+
+		//Ajout d'un membre de famille
+
 	}
 }

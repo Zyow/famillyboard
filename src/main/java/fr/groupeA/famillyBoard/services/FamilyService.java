@@ -1,5 +1,6 @@
 package fr.groupeA.famillyBoard.services;
 
+import fr.groupeA.famillyBoard.Methods.AgeCalculator;
 import fr.groupeA.famillyBoard.entities.Family;
 import fr.groupeA.famillyBoard.entities.FamilyMember;
 import fr.groupeA.famillyBoard.entities.Score;
@@ -20,16 +21,20 @@ import java.util.Optional;
 public class FamilyService {
 
     private FamilyRepository familyRepository;
-    private UserRepository userRepository;
-    private UserService userService;
-    private ScoreService scoreService;
-    private FamilyMemberService familyMemberService;
+//    private UserRepository userRepository;
+//    private UserService userService;
+//    private ScoreService scoreService;
+//    private FamilyMemberService familyMemberService;
 
-    public FamilyService(FamilyRepository familyRepository, ScoreService scoreService, UserService userService, FamilyMemberService familyMemberService) {
+//    public FamilyService(FamilyRepository familyRepository, ScoreService scoreService, UserService userService, FamilyMemberService familyMemberService) {
+//        this.familyRepository = familyRepository;
+//        this.userService = userService;
+//        this.scoreService = scoreService;
+//        this.familyMemberService = familyMemberService;
+//    }
+
+    public FamilyService(FamilyRepository familyRepository){
         this.familyRepository = familyRepository;
-        this.userService = userService;
-        this.scoreService = scoreService;
-        this.familyMemberService = familyMemberService;
     }
 
     // récupère la liste des familles
@@ -60,43 +65,44 @@ public class FamilyService {
     }
 
     //Création d'une famille par un utilisateur
-    public void userCreateAFamily(Long userId, String familyTitle){
-
-        Optional<User> user = userService.getUserById(userId);
-
-        // Vérification de l'âge de l'utilisateur
-        LocalDate today = LocalDate.now();
-        LocalDate birthDateUser = user.get().getBirthDate();
-        Period p = Period.between(birthDateUser, today);
-        System.out.println("Vous avez " + p.getYears() + " ans");
-
-        try{
-            if(p.getYears() > 18 ){
-                // Création d'une famille
-                Family family = new Family();
-                family.setTitle(familyTitle);
-                Family familyCreated = familyRepository.save(family);
-                System.out.println("Creation d'une famille : " + family);
-
-                // Création d'un score
-                Score score = new Score();
-                score.setScore(0);
-                Score scoreCreated = scoreService.createAScore(score);
-                System.out.println("Creation d'un score : " + score);
-
-                //Création d'un membre de la famille
-                FamilyMember familyMember = new FamilyMember();
-                familyMember.setUser(user.get());
-                familyMember.setFamily(familyCreated);
-                familyMember.setScore(scoreCreated);
-                familyMember.setRole(EnumRole.ADMINISTRATOR);
-                familyMember.setScore(scoreCreated);
-
-                familyMemberService.createOneFamilyMember(familyMember);
-                System.out.println("Creation d'un membre d'une famille : " + familyMember);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
+//    public void userCreateAFamily(Long userId, String familyTitle){
+//
+//        Optional<User> user = userService.getUserById(userId);
+//
+//        // Vérification de l'âge de l'utilisateur
+////        LocalDate today = LocalDate.now();
+////        LocalDate birthDateUser = user.get().getBirthDate();
+////        Period p = Period.between(birthDateUser, today);
+////        System.out.println("Vous avez " + p.getYears() + " ans");
+//        int age = AgeCalculator.getYears(user.get().getBirthDate());
+//
+//        try{
+//            if(age > 18 ){
+//                // Création d'une famille
+//                Family family = new Family();
+//                family.setTitle(familyTitle);
+//                Family familyCreated = familyRepository.save(family);
+//                System.out.println("Creation d'une famille : " + family);
+//
+//                // Création d'un score
+//                Score score = new Score();
+//                score.setScore(0);
+//                Score scoreCreated = scoreService.createAScore(score);
+//                System.out.println("Creation d'un score : " + score);
+//
+//                //Création d'un membre de la famille
+//                FamilyMember familyMember = new FamilyMember();
+//                familyMember.setUser(user.get());
+//                familyMember.setFamily(familyCreated);
+//                familyMember.setScore(scoreCreated);
+//                familyMember.setRole(EnumRole.ADMINISTRATOR);
+//                familyMember.setScore(scoreCreated);
+//
+//                familyMemberService.createOneFamilyMember(familyMember);
+//                System.out.println("Creation d'un membre d'une famille : " + familyMember);
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//    }
 }
