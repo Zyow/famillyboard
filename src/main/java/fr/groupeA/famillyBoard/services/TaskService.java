@@ -1,8 +1,8 @@
 package fr.groupeA.famillyBoard.services;
 
 import fr.groupeA.famillyBoard.entities.Task;
+import fr.groupeA.famillyBoard.repositories.FamilyMemberRepository;
 import fr.groupeA.famillyBoard.repositories.TaskRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,26 +12,32 @@ import java.util.Optional;
 public class TaskService {
 
     private final TaskRepository taskRepository;
+    private final FamilyMemberRepository familyMemberRepository;
 
-    @Autowired
-    public TaskService(TaskRepository taskRepository) {
+    public TaskService(TaskRepository taskRepository, FamilyMemberRepository familyMemberRepository) {
         this.taskRepository = taskRepository;
+        this.familyMemberRepository = familyMemberRepository;
     }
 
-
-  public List<Task> getTasks(){
+    public List<Task> getTasks() {
         return taskRepository.findAll();
-  }
+    }
 
-  public Optional<Task> getTaskById(Long id) {
+    public Optional<Task> getTaskById(Long id) {
         return taskRepository.findById(id);
-  }
+    }
 
-  public Task createTask(Task task) {
+    public Task createTask(Long familyMember, Task task) {
+        familyMemberRepository.findById(familyMember);
         return taskRepository.save(task);
-  }
+    }
 
-  public Task updateTask(Long id, Task task){
+    public List<Task> getTasksByFamilyMember(Long familyMemberId, Task task) {
+        familyMemberRepository.findById(familyMemberId);
+        return taskRepository.findTasksByFamilyMember(task);
+    }
+
+    public Task updateTask(Long id, Task task) {
         Task taskTemp = taskRepository.findById(id).get();
         taskTemp.setTitle(task.getTitle());
         taskTemp.setDescription(task.getDescription());
@@ -39,9 +45,9 @@ public class TaskService {
         taskTemp.setEndDate(task.getEndDate());
         taskTemp.setStatus(task.getStatus());
         return taskRepository.save(taskTemp);
-  }
+    }
 
-  public void deleteTask(Long id) {
+    public void deleteTask(Long id) {
         taskRepository.deleteById(id);
-  }
+    }
 }

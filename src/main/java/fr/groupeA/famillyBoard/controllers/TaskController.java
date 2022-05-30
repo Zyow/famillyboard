@@ -2,7 +2,6 @@ package fr.groupeA.famillyBoard.controllers;
 
 import fr.groupeA.famillyBoard.entities.Task;
 import fr.groupeA.famillyBoard.services.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,10 +11,8 @@ import java.util.Optional;
 @RequestMapping(path = "api/tasks")
 public class TaskController {
 
-
     private final TaskService taskService;
 
-    @Autowired
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
@@ -30,9 +27,14 @@ public class TaskController {
         return taskService.getTaskById(taskId);
     }
 
-    @PostMapping()
-    public Task addTask(@RequestBody Task task){
-        return taskService.createTask(task);
+    @GetMapping(path = "{familyMemberId}")
+    public List<Task> getAllTasksByFamilyMember(@PathVariable Long familyMemberId, @RequestBody Task task) {
+        return taskService.getTasksByFamilyMember(familyMemberId, task);
+    }
+
+    @PostMapping
+    public Task addTask(@PathVariable Long familyMember, @RequestBody Task task){
+        return taskService.createTask(familyMember, task);
     }
 
     @PutMapping(path = "{taskId}")

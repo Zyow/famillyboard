@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table( name = "familyMember" )
@@ -30,4 +31,6 @@ public class FamilyMember {
     @OneToOne
     private Score score;
 
+    @OneToMany
+    private List<Task> tasks;
 }

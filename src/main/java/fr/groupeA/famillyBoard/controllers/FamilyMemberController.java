@@ -1,7 +1,6 @@
 package fr.groupeA.famillyBoard.controllers;
 
 import fr.groupeA.famillyBoard.entities.FamilyMember;
-import fr.groupeA.famillyBoard.entities.User;
 import fr.groupeA.famillyBoard.enums.EnumRole;
 import fr.groupeA.famillyBoard.services.FamilyMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +36,16 @@ public class FamilyMemberController {
     }
 
     @PutMapping(path = "addMember")
-    public void addAUserToAFamily(@RequestParam Long familyMemberId, @RequestParam Long userId){
-        familyMemberService.addAUserToAFamily(familyMemberId, userId);
+    public void addAUserToAFamily(
+            @RequestParam Long familyMemberId,
+            @RequestParam String emailUser){
+        familyMemberService.addAUserToAFamily(familyMemberId, emailUser);
     }
 
     @PutMapping(path = "{familyMemberId}")
-    public FamilyMember updateFamilyMember(@PathVariable Long familyMemberId, @RequestBody FamilyMember familyMember, EnumRole role){
+    public FamilyMember updateFamilyMember(
+            @PathVariable Long familyMemberId,
+            @RequestBody FamilyMember familyMember, EnumRole role){
         return familyMemberService.updateOneFamilyMember(familyMemberId, familyMember, role);
     }
 

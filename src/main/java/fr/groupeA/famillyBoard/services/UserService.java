@@ -10,7 +10,6 @@ import fr.groupeA.famillyBoard.repositories.UserRepository;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,8 +33,12 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> getUserById(Long id){
+     public Optional<User> getUserById(Long id){
         return userRepository.findById(id);
+     }
+
+    public User getUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
     }
 
     public User saveUser(User user){

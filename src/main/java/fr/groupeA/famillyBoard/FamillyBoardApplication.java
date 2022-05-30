@@ -15,12 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
-public class FamillyBoardApplication implements ApplicationRunner {
+public class FamillyBoardApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FamillyBoardApplication.class, args);
 	}
 
+	/*
 	@Override
 	public void run(ApplicationArguments arg0) throws Exception{
 
@@ -70,17 +71,6 @@ public class FamillyBoardApplication implements ApplicationRunner {
 			Score score1 = new Score(1L, 0);
 			System.out.println("Creation d'un score : " + score1);
 
-			// Création d'un membre de la famille
-
-			FamilyMember familyMember1 = new FamilyMember(
-					1L,
-					user1,
-					family1,
-					EnumRole.ADMINISTRATOR,
-					score1);
-			System.out.println("Creation d'un membre d'une famille : " + familyMember1);
-
-
 			//Créer une liste de tâches
 			Task task1 = new Task(
 					1L,
@@ -89,8 +79,7 @@ public class FamillyBoardApplication implements ApplicationRunner {
 					true,
 					LocalDate.of(2022, 05,05),
 					LocalDate.of(2022, 05,05),
-					2,
-					familyMember1);
+					2);
 
 			Task task2 = new Task(
 					1L,
@@ -113,9 +102,21 @@ public class FamillyBoardApplication implements ApplicationRunner {
 				System.out.println(t.getTitle() + " - " + t.getFamilyMember());
 
 			}
+
+			// Création d'un membre de la famille
+			FamilyMember familyMember1 = new FamilyMember(
+					1L,
+					user1,
+					family1,
+					EnumRole.ADMINISTRATOR,
+					score1,
+					tasks);
+			System.out.println("Creation d'un membre d'une famille : " + familyMember1);
 		}
 
 		//Ajout d'un membre de famille
 
 	}
+
+	 */
 }
