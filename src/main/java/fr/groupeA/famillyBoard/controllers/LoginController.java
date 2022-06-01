@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.security.RolesAllowed;
 
 @RestController
+@RequestMapping(path = "api/login")
 public class LoginController {
 
     @CrossOrigin(origins = "/*")
@@ -17,7 +18,7 @@ public class LoginController {
     }
 
     @CrossOrigin(origins = "/*")
-    @RequestMapping("/*")
+    @RequestMapping("/user")
     @RolesAllowed("USER")
     public String getUser() {
         return "Welcome, User";

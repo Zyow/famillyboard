@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping(value= "/*")
+@RequestMapping(path = "api/register")
 public class SignInController {
 
     private PasswordEncoder passwordEncoder;
