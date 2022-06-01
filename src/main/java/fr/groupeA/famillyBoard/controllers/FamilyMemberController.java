@@ -39,8 +39,9 @@ public class FamilyMemberController {
         return familyMemberService.createOneFamilyMember(familyMember);
     }
 
-    @PostMapping( path = "assigntask" )
+    @PostMapping(path = "assignTask")
     public void assignATaskToAFamilyMember(@RequestParam Long memberToAssignId, @RequestBody Task task){
+        System.out.println("Passage controller");
         familyMemberService.assignATask(task, memberToAssignId);
     }
 
@@ -48,8 +49,8 @@ public class FamilyMemberController {
     @PutMapping(path = "addMember")
     public void addAUserToAFamily(
             @RequestParam Long familyMemberId,
-            @RequestParam String emailUser){
-        familyMemberService.addAUserToAFamily(familyMemberId, emailUser);
+            @RequestParam Long userId){
+        familyMemberService.addAUserToAFamily(familyMemberId, userId);
     }
 
     @CrossOrigin(origins = "/*")

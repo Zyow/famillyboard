@@ -49,11 +49,11 @@ public class FamilyMemberService {
     }
 
 
-    public void addAUserToAFamily(Long memberFamilyId, String userEmail){
+    public void addAUserToAFamily(Long memberFamilyId, Long userId){
 
         try{
             Optional<FamilyMember> memberFamilyAdmin = familyMemberRepository.findById(memberFamilyId);
-            User userToAdd = userService.getUserByEmail(userEmail);
+            Optional<User> userToAdd = userService.getUserById(userId);
             Optional<Family> family = familyService.getFamilyById(memberFamilyAdmin.get().getFamily().getId());
 
             EnumRole memberFamilyRole = memberFamilyAdmin.get().getRole();
@@ -65,12 +65,12 @@ public class FamilyMemberService {
 
                 //Création d'un membre de la famille
                 FamilyMember familyMember = new FamilyMember();
-                familyMember.setUser(userToAdd);
+                familyMember.setUser(userToAdd.get());
                 familyMember.setFamily(family.get());
                 familyMember.setScore(newScore);
                 familyMember.setRole(EnumRole.USER);
 
-                System.out.println("L'utilisateur " + userToAdd.getFirstName() + " " + userToAdd.getLastName() + " a été ajouté a la famille " + family.get().getTitle() );
+                System.out.println("L'utilisateur " + userToAdd.get().getFirstName() + " " + userToAdd.get().getLastName() + " a été ajouté a la famille " + family.get().getTitle() );
                 familyMemberRepository.save(familyMember);
 
             } else {
@@ -83,7 +83,8 @@ public class FamilyMemberService {
 
     public void assignATask(Task task, Long memberToAssignId){
 
-        Optional<FamilyMember> optionalMemberToAssign = getAFamilyMemberById(memberToAssignId);
+        Optional<FamilyMember> optionalMemberToAssign = familyMemberRepository.findById(memberToAssignId);
+        System.out.println(optionalMemberToAssign + "test");
         FamilyMember memberToAssign = optionalMemberToAssign.get();
 
         task.setFamilyMember(memberToAssign);
