@@ -84,10 +84,13 @@ public class FamilyMemberService {
     public void assignATask(Task task, Long memberToAssignId){
 
         Optional<FamilyMember> optionalMemberToAssign = familyMemberRepository.findById(memberToAssignId);
-        System.out.println(optionalMemberToAssign + "test");
         FamilyMember memberToAssign = optionalMemberToAssign.get();
 
-        task.setFamilyMember(memberToAssign);
-        taskService.createTask(task);
+        Task taskCreated = taskService.createTask(task);
+
+        List<Task> tasksList = memberToAssign.getTasks();
+        tasksList.add(taskCreated);
+        memberToAssign.setTasks(tasksList);
+        familyMemberRepository.save(memberToAssign);
     }
 }
