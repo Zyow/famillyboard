@@ -19,16 +19,19 @@ public class FamilyController {
         this.familyService = familyService;
     }
 
+    @CrossOrigin(origins = "/*")
     @GetMapping
     public List<Family> getFamilies() {
       return familyService.getFamilies();
     }
 
+    @CrossOrigin(origins = "/*")
     @GetMapping(path = "{familyId}")
     public Optional<Family> getFamilyById(@PathVariable Long familyId) {
         return familyService.getFamilyById(familyId);
     }
 
+    @CrossOrigin(origins = "/*")
     @PostMapping()
     public Family addFamily(@RequestBody Family family){
         return familyService.createFamily(family);
@@ -39,11 +42,13 @@ public class FamilyController {
 //        familyService.userCreateAFamily(userId, familyTitle);
 //    }
 
+    @CrossOrigin(origins = "/*")
     @PutMapping(path = "{familyId}")
     public Family updateFamily(@PathVariable Long familyId, @RequestBody Family family){
         return familyService.updateFamily(familyId, family);
     }
 
+    @CrossOrigin(origins = "/*")
     @DeleteMapping(path = "{familyId}")
     public void deleteFamily(@PathVariable Long familyId){
         familyService.deleteFamilyById(familyId);

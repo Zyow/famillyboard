@@ -3,6 +3,7 @@ import fr.groupeA.famillyBoard.entities.User;
 import fr.groupeA.famillyBoard.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +18,13 @@ public class SignInController {
     private PasswordEncoder passwordEncoder;
     private UserRepository userRepository;
 
+    @CrossOrigin(origins = "/*")
     @GetMapping
     public String signIn() {
         return "*";
     }
 
+    @CrossOrigin(origins = "/*")
     @PostMapping
     public String signIn(@Valid User user, HttpServletRequest http) throws ServletException {
 

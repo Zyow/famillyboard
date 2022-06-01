@@ -20,21 +20,25 @@ public class FamilyMemberController {
         this.familyMemberService = familyMemberService;
     }
 
+    @CrossOrigin(origins = "/*")
     @GetMapping
     public List<FamilyMember> getFamilyMembers() {
         return familyMemberService.getAllFamilyMembers();
     }
 
+    @CrossOrigin(origins = "/*")
     @GetMapping(path = "{familyMemberId}")
     public Optional<FamilyMember> getFamilyMemberById(@PathVariable Long familyMemberId) {
         return familyMemberService.getAFamilyMemberById(familyMemberId);
     }
 
+    @CrossOrigin(origins = "/*")
     @PostMapping()
     public FamilyMember createFamilyMember(@RequestBody FamilyMember familyMember){
         return familyMemberService.createOneFamilyMember(familyMember);
     }
 
+    @CrossOrigin(origins = "/*")
     @PutMapping(path = "addMember")
     public void addAUserToAFamily(
             @RequestParam Long familyMemberId,
@@ -42,6 +46,7 @@ public class FamilyMemberController {
         familyMemberService.addAUserToAFamily(familyMemberId, emailUser);
     }
 
+    @CrossOrigin(origins = "/*")
     @PutMapping(path = "{familyMemberId}")
     public FamilyMember updateFamilyMember(
             @PathVariable Long familyMemberId,
@@ -49,6 +54,7 @@ public class FamilyMemberController {
         return familyMemberService.updateOneFamilyMember(familyMemberId, familyMember, role);
     }
 
+    @CrossOrigin(origins = "/*")
     @DeleteMapping(path = "{familyMemberId}")
     public void deleteFamilyMember(@PathVariable Long familyMemberId){
         familyMemberService.deleteOneFamilyMemberById(familyMemberId);
