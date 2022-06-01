@@ -80,4 +80,13 @@ public class FamilyMemberService {
             System.out.println(e);
         }
     }
+
+    public void assignATask(Task task, Long memberToAssignId){
+
+        Optional<FamilyMember> optionalMemberToAssign = getAFamilyMemberById(memberToAssignId);
+        FamilyMember memberToAssign = optionalMemberToAssign.get();
+
+        task.setFamilyMember(memberToAssign);
+        taskService.createTask(task);
+    }
 }

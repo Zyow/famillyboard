@@ -1,6 +1,7 @@
 package fr.groupeA.famillyBoard.controllers;
 
 import fr.groupeA.famillyBoard.entities.FamilyMember;
+import fr.groupeA.famillyBoard.entities.Task;
 import fr.groupeA.famillyBoard.enums.EnumRole;
 import fr.groupeA.famillyBoard.services.FamilyMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,11 @@ public class FamilyMemberController {
     @PostMapping()
     public FamilyMember createFamilyMember(@RequestBody FamilyMember familyMember){
         return familyMemberService.createOneFamilyMember(familyMember);
+    }
+
+    @PostMapping( path = "assigntask" )
+    public void assignATaskToAFamilyMember(@RequestParam Long memberToAssignId, @RequestBody Task task){
+        familyMemberService.assignATask(task, memberToAssignId);
     }
 
     @CrossOrigin(origins = "/*")

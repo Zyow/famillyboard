@@ -37,8 +37,8 @@ public class TaskController {
 
     @CrossOrigin(origins = "/*")
     @PostMapping
-    public Task addTask(@PathVariable Long familyMember, @RequestBody Task task){
-        return taskService.createTask(familyMember, task);
+    public Task addTask(@RequestBody Task task){
+        return taskService.createTask(task);
     }
 
     @CrossOrigin(origins = "/*")

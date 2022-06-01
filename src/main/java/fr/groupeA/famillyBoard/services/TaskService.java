@@ -1,5 +1,6 @@
 package fr.groupeA.famillyBoard.services;
 
+import fr.groupeA.famillyBoard.entities.FamilyMember;
 import fr.groupeA.famillyBoard.entities.Task;
 import fr.groupeA.famillyBoard.repositories.FamilyMemberRepository;
 import fr.groupeA.famillyBoard.repositories.TaskRepository;
@@ -27,8 +28,7 @@ public class TaskService {
         return taskRepository.findById(id);
     }
 
-    public Task createTask(Long familyMember, Task task) {
-        familyMemberRepository.findById(familyMember);
+    public Task createTask(Task task) {
         return taskRepository.save(task);
     }
 
@@ -44,6 +44,7 @@ public class TaskService {
         taskTemp.setStartDate(task.getStartDate());
         taskTemp.setEndDate(task.getEndDate());
         taskTemp.setStatus(task.getStatus());
+        taskTemp.setFamilyMember(task.getFamilyMember());
         return taskRepository.save(taskTemp);
     }
 
