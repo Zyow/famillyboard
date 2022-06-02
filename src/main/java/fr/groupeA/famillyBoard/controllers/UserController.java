@@ -31,6 +31,9 @@ public class UserController {
         return userService.getUserById(userId);
     }
 
+    @GetMapping( path = "getUserByEmail")
+    public User getUserByEmail(@RequestParam String userEmail){ return  userService.getUserByEmail(userEmail);}
+
     @CrossOrigin(origins = "/*")
     @PostMapping()
     public User createUser(@RequestBody User user){
