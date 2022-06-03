@@ -101,11 +101,26 @@ public class FamilyMemberService {
         if (familyMember.get().getRole() == EnumRole.ADMINISTRATOR) {
 
             long familyId = familyMember.get().getFamily().getId();
-            List<FamilyMember> familyMembers = familyMemberRepository.findFamilyMembersByFamily_Id(familyMember.get().getFamily().getId());
+            List<FamilyMember> familyMembersList = familyMemberRepository.findFamilyMembersByFamily_Id(familyMember.get().getFamily().getId());
+
 
             for (FamilyMember fM :
-                    familyMembers) {
+                    familyMembersList) {
+
+                Long fMScoreId = fM.getScore().getId();
+                Long fMId = fM.getId();
+
                 familyMemberRepository.delete(fM);
+
+                scoreService.deleteScoreById(fMScoreId);
+                List<Task> taskList = taskService.getTasksByFamilyMember(fMId);
+
+                for (Task t :
+                        taskList) {
+                    taskService.deleteTask(t.getId());
+                }
+
+
             }
 
             familyService.deleteFamilyById(familyId);

@@ -31,8 +31,8 @@ public class TaskController {
 
     @CrossOrigin(origins = "/*")
     @GetMapping(path = "{familyMemberId}")
-    public List<Task> getAllTasksByFamilyMember(@PathVariable Long familyMemberId, @RequestBody Task task) {
-        return taskService.getTasksByFamilyMember(familyMemberId, task);
+    public List<Task> getAllTasksByFamilyMemberId(@PathVariable Long familyMemberId) {
+        return taskService.getTasksByFamilyMember(familyMemberId);
     }
 
     @CrossOrigin(origins = "/*")

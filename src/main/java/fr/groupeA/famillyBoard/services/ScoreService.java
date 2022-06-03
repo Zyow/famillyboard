@@ -20,4 +20,8 @@ public class ScoreService {
 
         return scoreRepository.save(score);
     }
+
+    public void deleteScoreById(Long id){
+        scoreRepository.deleteById(id);
+    }
 }

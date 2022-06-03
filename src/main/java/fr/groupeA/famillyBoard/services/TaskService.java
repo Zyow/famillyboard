@@ -32,9 +32,8 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public List<Task> getTasksByFamilyMember(Long familyMemberId, Task task) {
-        familyMemberRepository.findById(familyMemberId);
-        return taskRepository.findTasksByFamilyMember(task);
+    public List<Task> getTasksByFamilyMember(Long familyMemberId) {
+        return taskRepository.findTaskByFamilyMember_Id( familyMemberId );
     }
 
     public Task updateTask(Long id, Task task) {
