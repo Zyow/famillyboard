@@ -33,6 +33,7 @@ public class FamilyMemberService {
         return familyMemberRepository.findById(id);
     }
 
+    public List<FamilyMember> getAFamilyMemberByFamilyId(long id){ return familyMemberRepository.findFamilyMembersByFamily_Id(id); }
     public FamilyMember createOneFamilyMember(FamilyMember familyMember) {
         return familyMemberRepository.save(familyMember);
     }
@@ -92,5 +93,22 @@ public class FamilyMemberService {
         tasksList.add(taskCreated);
         memberToAssign.setTasks(tasksList);
         familyMemberRepository.save(memberToAssign);
+    }
+
+    public void deleteTheFamily(long memberFamilyId) {
+        Optional<FamilyMember> familyMember = familyMemberRepository.findById(memberFamilyId);
+
+        if (familyMember.get().getRole() == EnumRole.ADMINISTRATOR) {
+
+            long familyId = familyMember.get().getFamily().getId();
+            List<FamilyMember> familyMembers = familyMemberRepository.findFamilyMembersByFamily_Id(familyMember.get().getFamily().getId());
+
+            for (FamilyMember fM :
+                    familyMembers) {
+                familyMemberRepository.delete(fM);
+            }
+
+            familyService.deleteFamilyById(familyId);
+        }
     }
 }

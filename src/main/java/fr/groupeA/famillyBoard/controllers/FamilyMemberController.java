@@ -33,6 +33,11 @@ public class FamilyMemberController {
         return familyMemberService.getAFamilyMemberById(familyMemberId);
     }
 
+    @GetMapping( path = "family/{familyId}")
+    public List<FamilyMember> getFamilyMemberByFamilyId(@PathVariable Long familyId){
+        return familyMemberService.getAFamilyMemberByFamilyId(familyId);
+    }
+
     @CrossOrigin(origins = "/*")
     @PostMapping()
     public FamilyMember createFamilyMember(@RequestBody FamilyMember familyMember){
@@ -65,5 +70,10 @@ public class FamilyMemberController {
     @DeleteMapping(path = "{familyMemberId}")
     public void deleteFamilyMember(@PathVariable Long familyMemberId){
         familyMemberService.deleteOneFamilyMemberById(familyMemberId);
+    }
+
+    @DeleteMapping(path = "deleteMyFamily/{familyMemberId}")
+    public void deleteMyFamily(@PathVariable long familyMemberId){
+        familyMemberService.deleteTheFamily(familyMemberId);
     }
 }
